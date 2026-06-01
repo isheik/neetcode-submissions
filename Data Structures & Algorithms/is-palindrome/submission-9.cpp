@@ -1,0 +1,25 @@
+#include <cctype>
+
+class Solution {
+    public:
+    bool isPalindrome(string s) {
+        int r = s.length();
+        int l = 0;
+
+        while(l<=r) {
+            while(l<=r && !isalnum(s[l])) {
+                l++;
+            }
+            while(l<=r && !isalnum(s[r])) {
+                r--;
+            }
+
+            if(l<=r && tolower(s[l])!=tolower(s[r])) return false;
+
+            l++;
+            r--;
+        }
+
+        return true;
+    }
+};
