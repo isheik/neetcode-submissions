@@ -1,0 +1,72 @@
+// class Solution {
+// public:
+//     int longestConsecutive(vector<int>& nums) {
+//         unordered_set<int> numSet(nums.begin(), nums.end());
+//         int longest = 0;
+
+//         for(int num : nums) {
+//             if(numSet.find(num-1) == numSet.end()) {
+//                 int streak = 1;
+//                 int cur = num+1;
+                
+//                 while(numSet.find(cur) != numSet.end()) {
+//                     streak++;
+//                     cur = cur+1;
+//                 }
+
+//                 longest = max(longest, streak);
+//             }
+//         }
+
+//         return longest;
+//     }
+// };
+
+
+// class Solution {
+// public:
+//     int longestConsecutive(vector<int>& nums) {
+//         int res = 0;
+//         unordered_set<int> store(nums.begin(), nums.end());
+        
+//         for(int num:nums) {
+//             int streak =0, curr=num;
+
+//             while(store.find(curr) != store.end()) {
+//                 streak++;
+//                 curr++;
+//             }
+//             res = max(res, streak);
+//         }
+//         return res;
+//     }
+// };
+
+
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.empty()) return 0;
+        sort(nums.begin(), nums.end());
+
+        int res = 0, curr=nums[0], streak = 0, i=0;
+
+        while(i<nums.size()) {
+            if(curr != nums[i]) {
+                curr = nums[i];
+                streak = 0;
+            }
+
+            while(i<nums.size() && nums[i]==curr) {
+                i++;
+            }
+
+            streak++;
+            curr++;
+            res = max(res, streak);
+        }
+        return res;
+    }
+};
+
